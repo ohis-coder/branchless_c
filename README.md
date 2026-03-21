@@ -65,6 +65,14 @@ int current_selection = s3;
 	current_selection ^= (current_selection ^ s1) & ~s1_mask;
 ```
 
+6. Branchless Advanced Example w Cartesisan Products: Branchless Rules Engine for Mechanic Booking.
+Instead of storing a 3×4 lookup table in memory or using if/switch, we pack the entire permission matrix into a single 16-bit integer and do a branchless lookup. This pattern scales beautifully for high-frequency matching systems.
+```
+uint16_t ruleset = (0b0011 << 8) |  // Night rules
+				   (0b1110 << 4) |  // Afternoon rules
+ 			       (0b1110 << 0);   // Morning rules; 
+```
+
 Performance & Use Cases
 Feature	- Benefit
 Zero Branching - Prevents CPU pipeline stalls on random data.
